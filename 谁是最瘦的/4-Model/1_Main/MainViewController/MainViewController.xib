@@ -19,8 +19,10 @@
                 <outlet property="btnConfirm" destination="iPL-dK-pGH" id="em2-xI-OFI"/>
                 <outlet property="btnView" destination="Ooz-nU-sQn" id="eoV-Y1-BWU"/>
                 <outlet property="lbAnswerName" destination="ino-dA-4sb" id="9v6-z2-vmo"/>
+                <outlet property="lbInfo1" destination="Id9-t6-4JN" id="jh0-xj-5tg"/>
+                <outlet property="lbInfo2" destination="fAQ-JQ-5cD" id="0Iv-uS-TAK"/>
                 <outlet property="lbName" destination="qk2-8Y-qvk" id="pSo-fs-d3d"/>
-                <outlet property="tfName" destination="n4O-CP-L09" id="JJP-pE-6g5"/>
+                <outlet property="lbName2" destination="Clr-yG-QAy" id="WID-MR-fAZ"/>
                 <outlet property="tv" destination="Id9-t6-4JN" id="Plz-tA-egA"/>
                 <outlet property="vAnswer" destination="6DH-4a-Lax" id="i35-Ex-z1z"/>
                 <outlet property="vAsk" destination="pp0-8c-Xce" id="Jzb-FO-Ih2"/>
@@ -201,19 +203,17 @@
             <rect key="frame" x="0.0" y="0.0" width="330" height="289"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Id9-t6-4JN">
-                    <rect key="frame" x="10" y="10" width="310" height="60"/>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="世界上最瘦的人,就在魔镜附近" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Id9-t6-4JN">
+                    <rect key="frame" x="10" y="10" width="310" height="30"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="60" id="B4B-cb-viY"/>
+                        <constraint firstAttribute="height" constant="30" id="B4B-cb-viY"/>
                     </constraints>
-                    <string key="text">世界上最瘦的人就在魔镜面前,然而魔镜却不知道她的名字   
-</string>
                     <fontDescription key="fontDescription" name="HannotateSC-W5" family="Hannotate SC" pointSize="17"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                 </textView>
-                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="可以告诉魔镜你的名字么" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="fAQ-JQ-5cD">
-                    <rect key="frame" x="10" y="80" width="310" height="50"/>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="经过魔镜的反复探索,这个人就是:" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="fAQ-JQ-5cD">
+                    <rect key="frame" x="10" y="50" width="310" height="50"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="50" id="LKJ-8V-pKh"/>
@@ -221,30 +221,8 @@
                     <fontDescription key="fontDescription" name="HannotateSC-W5" family="Hannotate SC" pointSize="17"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                 </textView>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jgR-83-EwW">
-                    <rect key="frame" x="10" y="140" width="310" height="40"/>
-                    <subviews>
-                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="n4O-CP-L09">
-                            <rect key="frame" x="0.0" y="0.0" width="310" height="40"/>
-                            <nil key="textColor"/>
-                            <fontDescription key="fontDescription" name="HannotateSC-W5" family="Hannotate SC" pointSize="17"/>
-                            <textInputTraits key="textInputTraits"/>
-                            <connections>
-                                <action selector="textFieldEndEditing:" destination="-1" eventType="editingDidEnd" id="qvQ-rH-PYh"/>
-                            </connections>
-                        </textField>
-                    </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <constraints>
-                        <constraint firstAttribute="bottom" secondItem="n4O-CP-L09" secondAttribute="bottom" id="Czw-9a-JUs"/>
-                        <constraint firstItem="n4O-CP-L09" firstAttribute="leading" secondItem="jgR-83-EwW" secondAttribute="leading" id="ExU-iE-d0y"/>
-                        <constraint firstAttribute="trailing" secondItem="n4O-CP-L09" secondAttribute="trailing" id="WEV-CP-ylX"/>
-                        <constraint firstItem="n4O-CP-L09" firstAttribute="top" secondItem="jgR-83-EwW" secondAttribute="top" id="kfb-sM-2Ts"/>
-                        <constraint firstAttribute="height" constant="40" id="uKY-Nb-N7C"/>
-                    </constraints>
-                </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iPL-dK-pGH">
-                    <rect key="frame" x="115.5" y="200" width="100" height="36"/>
+                    <rect key="frame" x="115.5" y="223" width="100" height="36"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="100" id="yCK-Rl-hmw"/>
                     </constraints>
@@ -254,19 +232,28 @@
                         <action selector="clickConfirmBtn:" destination="-1" eventType="touchUpInside" id="jte-hl-LB2"/>
                     </connections>
                 </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="高延邦" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Clr-yG-QAy">
+                    <rect key="frame" x="10" y="110" width="310" height="41"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="41" id="LQl-5P-jAt"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="HannotateSC-W5" family="Hannotate SC" pointSize="29"/>
+                    <color key="textColor" red="0.87450980389999999" green="0.086274509799999996" blue="0.1333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" red="0.87176165803108807" green="0.87176165803108807" blue="0.87176165803108807" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="fAQ-JQ-5cD" firstAttribute="leading" secondItem="pp0-8c-Xce" secondAttribute="leading" constant="10" id="2VU-8D-mWL"/>
-                <constraint firstItem="jgR-83-EwW" firstAttribute="top" secondItem="fAQ-JQ-5cD" secondAttribute="bottom" constant="10" id="6aO-Kw-6x1"/>
                 <constraint firstAttribute="trailing" secondItem="fAQ-JQ-5cD" secondAttribute="trailing" constant="10" id="7Po-oz-P59"/>
                 <constraint firstItem="iPL-dK-pGH" firstAttribute="centerX" secondItem="pp0-8c-Xce" secondAttribute="centerX" id="CYu-si-dkq"/>
-                <constraint firstItem="iPL-dK-pGH" firstAttribute="top" secondItem="jgR-83-EwW" secondAttribute="bottom" constant="20" id="Fow-sg-Heh"/>
                 <constraint firstAttribute="trailing" secondItem="Id9-t6-4JN" secondAttribute="trailing" constant="10" id="Oa4-fW-pVi"/>
                 <constraint firstItem="Id9-t6-4JN" firstAttribute="leading" secondItem="pp0-8c-Xce" secondAttribute="leading" constant="10" id="PT4-x0-fu3"/>
+                <constraint firstItem="Clr-yG-QAy" firstAttribute="leading" secondItem="pp0-8c-Xce" secondAttribute="leading" constant="10" id="TWy-j3-myN"/>
                 <constraint firstItem="fAQ-JQ-5cD" firstAttribute="top" secondItem="Id9-t6-4JN" secondAttribute="bottom" constant="10" id="b9n-w0-mq7"/>
-                <constraint firstItem="jgR-83-EwW" firstAttribute="leading" secondItem="pp0-8c-Xce" secondAttribute="leading" constant="10" id="hfx-Ug-PoT"/>
-                <constraint firstAttribute="trailing" secondItem="jgR-83-EwW" secondAttribute="trailing" constant="10" id="wvf-jf-bwH"/>
+                <constraint firstItem="Clr-yG-QAy" firstAttribute="top" secondItem="fAQ-JQ-5cD" secondAttribute="bottom" constant="10" id="kHc-wY-DLO"/>
+                <constraint firstAttribute="bottom" secondItem="iPL-dK-pGH" secondAttribute="bottom" constant="30" id="q9a-wb-7Ue"/>
+                <constraint firstAttribute="trailing" secondItem="Clr-yG-QAy" secondAttribute="trailing" constant="10" id="wi0-5K-h0H"/>
                 <constraint firstItem="Id9-t6-4JN" firstAttribute="top" secondItem="pp0-8c-Xce" secondAttribute="top" constant="10" id="x3y-Hd-ALd"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

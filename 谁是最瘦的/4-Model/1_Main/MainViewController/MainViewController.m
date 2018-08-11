@@ -20,11 +20,24 @@ UITextFieldDelegate
 @property (weak, nonatomic) IBOutlet UIView *vView;
 @property (weak, nonatomic) IBOutlet UIView *vAnswer;
 
-@property (weak, nonatomic) IBOutlet UIButton *btnConfirm;
-@property (weak, nonatomic) IBOutlet UITextField *tfName;
+
+
 @property (strong, nonatomic) IBOutlet UIView *vAsk;
 @property (weak, nonatomic) IBOutlet UILabel *lbName;
 @property (weak, nonatomic) IBOutlet UILabel *lbAnswerName;
+
+//alertController上的action
+@property (nonatomic,strong) UIAlertAction *actionConfirm;
+@property (nonatomic,strong) UITextField *tfName;
+
+//vAsk上的名字标签
+@property (weak, nonatomic) IBOutlet UITextView *lbInfo1;
+@property (weak, nonatomic) IBOutlet UITextView *lbInfo2;
+@property (weak, nonatomic) IBOutlet UILabel *lbName2;
+@property (weak, nonatomic) IBOutlet UIButton *btnConfirm;
+
+//存储中的名字
+@property (nonatomic,strong) NSString *name;
 
 
 @end
@@ -57,14 +70,44 @@ UITextFieldDelegate
         NSLog(@"%@",NSStringFromCGRect(self.vIndicator.frame));
     });
     
-    _tfName.delegate = self;
-    
-   
+    _vAnswer.hidden = YES;
+    _vView.hidden = NO;
+    _lbName2.alpha = 0;
+    _lbInfo1.alpha = 0;
+    _lbInfo2.alpha = 0;
+    _btnConfirm.alpha = 0;
+}
 
-         _vAnswer.hidden = YES;
-        _vView.hidden = NO;
-    
-    
+- (void)viewDidAppear:(BOOL)animated {
+    NSString *name = [[NSUserDefaults standardUserDefaults] objectForKey:Name];
+    if(!name) {
+        UIAlertController *alertController=[UIAlertController  alertControllerWithTitle:@"温馨提示" message:@"请输入你认为的最瘦的人的名字" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *action=[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            self.name = self.tfName.text;
+            [[NSUserDefaults standardUserDefaults] setObject:self.name forKey:Name];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+        }];
+        action.enabled = NO;
+        _actionConfirm = action;
+        [alertController addAction:action];
+        [alertController addTextFieldWithConfigurationHandler:^(UITextField *textField) {
+            self.tfName = textField;
+            textField.textColor=[UIColor redColor];
+            textField.font=[UIFont systemFontOfSize:20];
+            textField.delegate = self;
+            [textField becomeFirstResponder];
+        }];
+        
+        [self presentViewController:alertController animated:YES completion:nil];
+    }
+    else {
+        self.name = name;
+    }
+}
+
+- (void)setName:(NSString *)name {
+    _name = name;
+    _lbName2.text = _name;
 }
 
 - (void)viewDidLayoutSubviews {
@@ -95,20 +138,19 @@ UITextFieldDelegate
 
 #pragma mark 5 Delegate
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    if(_tfName.hasText) {
-        _btnConfirm.enabled = YES;
+    if(textField.hasText) {
     }
-    [_tfName resignFirstResponder];
+    [textField resignFirstResponder];
     return YES;
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     NSString *toBeString = [textField.text stringByReplacingCharactersInRange:range withString:string];
     if(toBeString.length) {
-        _btnConfirm.enabled = YES;
+        _actionConfirm.enabled = YES;
     }
     else {
-        _btnConfirm.enabled = NO;
+        _actionConfirm.enabled = NO;
     }
     return YES;
 }
@@ -118,11 +160,6 @@ UITextFieldDelegate
 #pragma mark 6.1 ButtonEvent
 
 - (IBAction)clickViewBtn:(id)sender {
-//    UIView *askView = [[[NSBundle mainBundle]loadNibNamed:@"MainViewController" owner:nil options:nil]lastObject];
-    _btnConfirm.enabled = NO;
-//    [GaDisplayManager displayView:_vAsk inSuperview:self.view withMaskView:YES corerRadius:20 autoUndisplayDelay:0 backgroundColorAlpha:1];
-//    return;
-    
     _vView.hidden = YES;
     __block int count = 0;
     __block CGFloat speed = 0;
@@ -153,8 +190,21 @@ UITextFieldDelegate
                 
                 [GaDisplayManager displayView:self.vAsk inSuperview:self.view withMaskView:YES corerRadius:20 autoUndisplayDelay:0 backgroundColorAlpha:1];
                 
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                    [self.tfName becomeFirstResponder];
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    [UIView animateWithDuration:1.2 animations:^{
+                        self.lbInfo1.alpha = 1;
+                    } completion:^(BOOL finished) {
+                        [UIView animateWithDuration:1.5 animations:^{
+                            self.lbInfo2.alpha = 1;
+                        } completion:^(BOOL finished) {
+                            [UIView animateWithDuration:2 animations:^{
+                                self.lbName2.alpha = 1;
+                            } completion:^(BOOL finished) {
+                                self.btnConfirm.alpha = 1;
+                            }];
+                        }];
+                    }];
+                   
                 });
                 
             });
@@ -179,9 +229,9 @@ UITextFieldDelegate
 
 - (IBAction)clickConfirmBtn:(id)sender {
     [GaDisplayManager undisplayView:_vAsk animateWithType:1];
-    _lbName.text = _tfName.text;
-    _lbAnswerName.text = _tfName.text;
-    NSString *name = _tfName.text;
+    _lbName.text = _name;
+    _lbAnswerName.text = _name;
+
     _vAnswer.hidden = NO;
 }
 
